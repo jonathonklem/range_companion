@@ -1,0 +1,7 @@
+{
+  "name": "Range Companion",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
