@@ -1,8 +1,7 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Link } from 'react-router-dom';
 import {
   IonApp,
-  IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
@@ -11,51 +10,47 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalculator, faAnglesDown, faPager } from '@fortawesome/free-solid-svg-icons'
 
 import './output.css';
 import MoaCalculator from './pages/moa_calculator';
+import Beeper from './pages/beeper';
+import BulletDrop from './pages/bullet_drop';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp className="bg-darkbg">
     <IonReactRouter>
-      <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/moa_calculator">
             <MoaCalculator />
           </Route>
-          <Route exact path="/tab2">
-            
+          <Route exact path="/beeper">
+            <Beeper />
           </Route>
-          <Route path="/tab3">
-           
+          <Route exact path="/bullet_drop">
+            <BulletDrop />
           </Route>
           <Route exact path="/">
             <Redirect to="/moa_calculator" />
           </Route>
         </IonRouterOutlet>
-
-        <IonTabBar className="bg-redbg" slot="bottom">
-          <IonTabButton tab="tab1" href="/moa_calculator">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>MOA Calculator</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/bullet_drop">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Bullet Drop</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/group_checker">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Group Checker</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/beeper">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Beeper</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+        <div className="text-center fixed w-full bottom-2">
+            <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block text-center hover:text-darkbg" to="/moa_calculator">
+              <FontAwesomeIcon className="mr-4" icon={faCalculator} />
+              <IonLabel className="hover:text-darkbg">MOA Calculator</IonLabel>
+            </Link>
+            <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block hover:text-darkbg" to="/bullet_drop">
+              <FontAwesomeIcon className="mr-4" icon={faAnglesDown} />
+              <IonLabel className="hover:text-darkbg">Bullet Drop</IonLabel>
+            </Link>
+            <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block hover:text-darkbg" to="/beeper">
+              <FontAwesomeIcon className="mr-4" icon={faPager} />
+              <IonLabel className="hover:text-darkbg">Beeper</IonLabel>
+            </Link>
+        </div>
     </IonReactRouter>
   </IonApp>
 );

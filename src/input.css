@@ -5,8 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist');
 
 select, input[type="text"], select, textarea, input[type="number"] {
-    @apply p-4;
-    @apply block w-full tracking-wider text-sm rounded-md;
-    @apply bg-inputbg;
-    @apply text-inputfg;
-  }
+  @apply p-4;
+  @apply block w-full tracking-wider text-sm rounded-md;
+  @apply bg-inputbg;
+  @apply text-inputfg;
+}
