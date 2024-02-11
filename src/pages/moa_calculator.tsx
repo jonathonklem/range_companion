@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MoaCalculator(): JSX.Element {
+const MoaCalculator = () => {
     const [rangeUnit, setRangeUnit] = React.useState(914.4);
     const [lengthUnit, setLengthUnit] = React.useState(25.4);
     const [moaUnit, setMoaUnit] = React.useState(25.4);

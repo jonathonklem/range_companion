@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-
 import audio from "../data/audio.jsx"
 
-function Beeper():JSX.Element {
+const Beeper = () => {
     const [debounce, setDebounce] = React.useState(false);
     const [maxRandomPause, setMaxRandomPause] = React.useState(5);
     const [minRandomPause, setMinRandomPause] = React.useState(1);
     const [parTime, setParTime] = React.useState(0);
     const [debugMessage, setDebugMessage] = React.useState('');
-    const [randomPause, setRandomPause] = React.useState(0);
+    const [timer, setTimer] = React.useState<NodeJS.Timeout|null>(null);
 
     useEffect(() => {
         audio.load();
@@ -16,15 +15,16 @@ function Beeper():JSX.Element {
     
     const startTimer = () => {
         const randomPause = Math.round((Math.random() * (maxRandomPause - minRandomPause) + minRandomPause)*1000)/1000;
-        setRandomPause(randomPause);
-        setTimeout(() => {
+        setTimer(setTimeout(() => {
             beep();
+            destroyTimer();
             if (parTime) {
-                setTimeout(() => {
+                setTimer(setTimeout(() => {
                     beep();
-                }, parTime * 1000);
+                    destroyTimer();
+                }, parTime * 1000));
             }
-        }, randomPause * 1000);   
+        }, randomPause * 1000));   
     }
 
     const beep = () => {
@@ -36,6 +36,15 @@ function Beeper():JSX.Element {
         audio.onended = () => {
             setDebounce(false); 
             setDebugMessage('');
+        }
+    }
+
+    const destroyTimer = () => {
+        setDebugMessage('destroying timer')
+        setTimer(null);
+        
+        if (timer) {
+            clearTimeout(timer); 
         }
     }
 
@@ -57,7 +66,8 @@ function Beeper():JSX.Element {
                     <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={parTime} onChange={(e) => setParTime(Number(e.target.value))} name="par_time" /></div>
                 </label> 
             </form>
-            <button onClick={startTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-8">Beep</button>
+            <button onClick={startTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-4">Beep</button>
+            { timer && (<button onClick={destroyTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-2">Cancel Timer</button>) }
         </div>
     );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,6 +11,8 @@ import {
   } from 'chart.js';
 import { Line } from 'react-chartjs-2'
 
+import { colorArr, options } from "../data/chartOptions"
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -22,91 +23,18 @@ ChartJS.register(
     Legend
   );
 
-const options = {
-    responsive: true,
-    bezierCurve: true,
-    elements: {
-        line: {
-            tension: .3
-        }
-    },
-    plugins: {
-      legend: {
-        color: 'white',
-        position: 'top' as const,
-        labels: {
-          color: 'white',
-        },
-      },
-      datalabels: {
-        color: 'white',
-      },
-      title: {
-        display: false,
-      },
-    },
-    scales: {
-        x: {
-          ticks: {
-            color: "white",
-          },
-          grid: {
-            color: "white",
-          },
-        },
-        y: {
-          ticks: {
-            color: "white",
-          },
-          grid: {
-            color: "white",
-          },
-        },
-    }
-};
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-const data = {
-    labels,
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: labels.map(() => Math.random()*10000),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        fontColor: 'white'
-      },
-      {
-        label: 'Dataset 2',
-        data: labels.map(() => Math.random()*10000),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        fontColor: 'white'
-      },
-    ],
-};
-
-const colorArr = [
-    "#FF7F50", // Coral
-    "#40E0D0", // Turquoise
-    "#FF00FF", // Magenta
-    "#7FFF00", // Chartreuse
-    "#0F52BA", // Sapphire blue
-    "#FFA500", // Tangerine
-    "#50C878", // Emerald green
-    "#8A2BE2"  // Violet
-    // Add more colors as needed
-  ];
-
 interface GlobalBulletDropData {
     [key: string]: BulletDropData;
 }
 interface BulletDropData {
     [key: string]: number[];
 }
-function BulletDrop():JSX.Element {
+interface DatasetType { label: string; data: number[]; borderColor: string; backgroundColor: string; }
+interface DataType { labels: string[]; datasets: DatasetType[]; }
 
-    const [localOptions, setLocalOptions] = React.useState(options);
-    const [localData, setLocalData] = React.useState(data);
+const BulletDrop = () => {
+
+    const [localData, setLocalData] = React.useState<DataType|null>(null);
     const [displaying, setDisplaying] = React.useState('Pistol');
 
     const weaponOptions = ['Pistol', 'Rifle'];
@@ -127,9 +55,9 @@ function BulletDrop():JSX.Element {
         }
     }
 
-    function getData(weapon:string) {
+    const getData = (weapon:string) => {
         const labels = [];
-        const mydatasets: { label: string; data: number[]; borderColor: string; backgroundColor: string; fontColor: string }[] = [];
+        const mydatasets: DatasetType[] = [];
 
         const step = (weapon === 'Pistol') ? 10 : 50;
 
@@ -145,7 +73,6 @@ function BulletDrop():JSX.Element {
                 data: dropMap[weapon][key],
                 borderColor: colorArr[i],
                 backgroundColor: colorArr[i++],
-                fontColor: 'white'
             })
         }); 
 
@@ -159,7 +86,7 @@ function BulletDrop():JSX.Element {
         setLocalData(getData(displaying));
     }, [displaying]);
 
-    function toggleDisplay() {
+    const toggleDisplay = () => {
         if (displaying === 'Pistol') {
             setDisplaying('Rifle');
         } else {
@@ -172,7 +99,7 @@ function BulletDrop():JSX.Element {
             <h1 className="text-2xl text-center mt-8 tracking-widest">Bullet Drop</h1>
             <button onClick={toggleDisplay} className="block mx-auto rounded-3xl tracking-wider  bg-redbg drop-shadow-lg text-white py-2 px-4 text-center m-4">Displaying {displaying} (click to change)</button>
             <div className="bg-altrow p-4">
-                <Line className="bg-grey-500" options={localOptions} data={localData} />
+                {localData && (<Line className="bg-grey-500" options={options} data={localData} />) }
             </div>
             <h2 className="text-lg text-center mt-8 tracking-widest">Disclaimer:</h2>
             <p className="font-extralight opacity-80 mx-auto px-4 py-2 block max-w-xl tracking-wider text-base">This calculator assumes you&apos;re shooting 124gr 9mm with 1150fps muzzle velocity for pistols with an optic mounted .5in HOB and 55gr .223 with 3215fps muzzle velocity with an optic mounted 2in HOB for rifles.</p>
