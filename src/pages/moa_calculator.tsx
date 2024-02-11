@@ -45,7 +45,7 @@ const MoaCalculator = () => {
     
     return (
         <>
-            <h1 className="text-2xl text-center pt-4 pb-4 tracking-widest">MOA Calculator</h1>
+            <h1 className="text-2xl text-center pb-4 tracking-widest mt-12">MOA Calculator</h1>
             <em className="text-center green-600 block my-2">{message}</em>
             <form className="w-5/6 mx-auto">
                 <label className="block my-2 mx-auto">

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">range-companion</string>
-    <string name="title_activity_main">range-companion</string>
-    <string name="package_name">com.jonathonklem.range_companion</string>
-    <string name="custom_url_scheme">com.jonathonklem.range_companion</string>
+    <string name="app_name">RangeCompanion</string>
+    <string name="title_activity_main">RangeCompanion</string>
+    <string name="package_name">com.jonathonklem.rangecompanion</string>
+    <string name="custom_url_scheme">com.jonathonklem.rangecompanion</string>
 </resources>

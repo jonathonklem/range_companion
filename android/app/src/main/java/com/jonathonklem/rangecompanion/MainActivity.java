@@ -1,4 +1,4 @@
-package com.jonathonklem.range_companion;
+package com.jonathonklem.rangecompanion;
 
 import com.getcapacitor.BridgeActivity;
 

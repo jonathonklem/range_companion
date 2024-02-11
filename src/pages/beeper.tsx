@@ -49,7 +49,7 @@ const Beeper = () => {
 
     return (
         <div>
-            <h1 className="text-2xl text-center mt-8 tracking-widest">Beeper</h1>
+            <h1 className="text-2xl text-center mt-12 tracking-widest">Beeper</h1>
             <em className="text-center green-600 block my-2">{debugMessage}</em>
             <form className="w-5/6  mx-auto">
                 <label className="block my-2 mx-auto">
