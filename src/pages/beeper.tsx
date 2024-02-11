@@ -40,7 +40,6 @@ const Beeper = () => {
     }
 
     const destroyTimer = () => {
-        setDebugMessage('destroying timer')
         setTimer(null);
         
         if (timer) {
@@ -67,7 +66,7 @@ const Beeper = () => {
                 </label> 
             </form>
             <button onClick={startTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-4">Beep</button>
-            { timer && (<button onClick={destroyTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-2">Cancel Timer</button>) }
+            { timer && (<button onClick={destroyTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-2">Cancel</button>) }
         </div>
     );
 }

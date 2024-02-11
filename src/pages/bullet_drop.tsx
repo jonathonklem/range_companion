@@ -29,6 +29,7 @@ interface GlobalBulletDropData {
 interface BulletDropData {
     [key: string]: number[];
 }
+
 interface DatasetType { label: string; data: number[]; borderColor: string; backgroundColor: string; }
 interface DataType { labels: string[]; datasets: DatasetType[]; }
 
