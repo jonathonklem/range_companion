@@ -32,7 +32,14 @@ const options = {
     },
     plugins: {
       legend: {
+        color: 'white',
         position: 'top' as const,
+        labels: {
+          color: 'white',
+        },
+      },
+      datalabels: {
+        color: 'white',
       },
       title: {
         display: false,
@@ -66,12 +73,14 @@ const data = {
         data: labels.map(() => Math.random()*10000),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        fontColor: 'white'
       },
       {
         label: 'Dataset 2',
         data: labels.map(() => Math.random()*10000),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        fontColor: 'white'
       },
     ],
 };
@@ -98,18 +107,19 @@ function BulletDrop():JSX.Element {
 
     const [localOptions, setLocalOptions] = React.useState(options);
     const [localData, setLocalData] = React.useState(data);
+    const [displaying, setDisplaying] = React.useState('Pistol');
 
     const weaponOptions = ['Pistol', 'Rifle'];
     const zeroes        = [25, 36, 50, 100];
 
     // pistol step is 10, rifle step is 50
     const dropMap:GlobalBulletDropData = {
-        'pistol': {
+        'Pistol': {
             '15':  [-0.5, -0.09, 0.01, -0.20, -0.74, -1.62, -2.84, -4.42],
             '25':  [-0.5, -0.07, 0.06, -0.13, -0.64, -1.49, -2.69, -4.25],
             '50':  [-0.5,  0.24, 0.66, 0.78, 0.56, 0.01, -0.89, -2.14],
         },
-        'rifle': {
+        'Rifle': {
             '25':  [-2,  1.72, 4.42, 5.96, 6.16,  4.82,  1.69],
             '36':  [-2,  0.63, 2.23, 2.67, 1.78, -0.66, -4.88],
             '50':  [-2, -0.01, 0.97, 0.78, -0.75,-3.81, -8.67],
@@ -119,9 +129,9 @@ function BulletDrop():JSX.Element {
 
     function getData(weapon:string) {
         const labels = [];
-        const mydatasets: { label: string; data: number[]; borderColor: string; backgroundColor: string; }[] = [];
+        const mydatasets: { label: string; data: number[]; borderColor: string; backgroundColor: string; fontColor: string }[] = [];
 
-        const step = (weapon === 'pistol') ? 10 : 50;
+        const step = (weapon === 'Pistol') ? 10 : 50;
 
         for (let i = 0; i < dropMap[weapon]['25'].length; i++) {
             const yards = i * step;
@@ -135,6 +145,7 @@ function BulletDrop():JSX.Element {
                 data: dropMap[weapon][key],
                 borderColor: colorArr[i],
                 backgroundColor: colorArr[i++],
+                fontColor: 'white'
             })
         }); 
 
@@ -145,12 +156,21 @@ function BulletDrop():JSX.Element {
     }
 
     useEffect(() => {
-        setLocalData(getData('pistol'));
-    }, []);
+        setLocalData(getData(displaying));
+    }, [displaying]);
+
+    function toggleDisplay() {
+        if (displaying === 'Pistol') {
+            setDisplaying('Rifle');
+        } else {
+            setDisplaying('Pistol');
+        }
+    }
 
     return (
         <div>
             <h1 className="text-2xl text-center mt-8 tracking-widest">Bullet Drop</h1>
+            <button onClick={toggleDisplay} className="block mx-auto rounded-3xl tracking-wider  bg-redbg drop-shadow-lg text-white py-2 px-4 text-center m-4">Displaying {displaying} (click to change)</button>
             <div className="bg-altrow p-4">
                 <Line className="bg-grey-500" options={localOptions} data={localData} />
             </div>
