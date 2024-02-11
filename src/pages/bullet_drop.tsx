@@ -97,7 +97,7 @@ const BulletDrop = () => {
     return (
         <div>
             <h1 className="text-2xl text-center mt-8 tracking-widest">Bullet Drop</h1>
-            <button onClick={toggleDisplay} className="block mx-auto rounded-3xl tracking-wider  bg-redbg drop-shadow-lg text-white py-2 px-4 text-center m-4">Displaying {displaying} (click to change)</button>
+            <button onClick={toggleDisplay} className="block mx-auto rounded-3xl tracking-wider  bg-redbg drop-shadow-lg text-white py-2 px-4 text-center m-4">Displaying {displaying}<br/>(click to change)</button>
             <div className="bg-altrow p-4">
                 {localData && (<Line className="bg-grey-500" options={options} data={localData} />) }
             </div>

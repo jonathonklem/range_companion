@@ -37,18 +37,18 @@ const App: React.FC = () => (
             <Redirect to="/moa_calculator" />
           </Route>
         </div>
-        <div className="text-center fixed w-full bottom-2">
-            <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block text-center hover:text-darkbg" to="/moa_calculator">
-              <FontAwesomeIcon className="mr-4" icon={faCalculator} />
-              <IonLabel className="hover:text-darkbg">MOA Calculator</IonLabel>
+        <div className="text-center fixed w-full bottom-0 bg-darkbg p-4">
+            <Link className="inline-block text-xs mx-1 bg-redbg px-2 py-2 inline-block text-center hover:text-darkbg" to="/moa_calculator">
+              <FontAwesomeIcon className="mr-2" icon={faCalculator} />
+              <IonLabel className="hover:text-darkbg">MOA Calc</IonLabel>
             </Link>
-            <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block hover:text-darkbg" to="/bullet_drop">
-              <FontAwesomeIcon className="mr-4" icon={faAnglesDown} />
-              <IonLabel className="hover:text-darkbg">Bullet Drop</IonLabel>
+            <Link className="inline-block text-xs mx-1 bg-redbg px-2 py-2 inline-block hover:text-darkbg" to="/bullet_drop">
+              <FontAwesomeIcon className="mr-2" icon={faAnglesDown} />
+              <IonLabel className="hover:text-darkbg">Drop</IonLabel>
             </Link>
-            <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block hover:text-darkbg" to="/beeper">
-              <FontAwesomeIcon className="mr-4" icon={faPager} />
-              <IonLabel className="hover:text-darkbg">Beeper</IonLabel>
+            <Link className="inline-block text-xs mx-1 bg-redbg px-2 py-2 inline-block hover:text-darkbg" to="/beeper">
+              <FontAwesomeIcon className="mr-2" icon={faPager} />
+              <IonLabel className="hover:text-darkbg">Beep</IonLabel>
             </Link>
         </div>
     </IonReactRouter>
