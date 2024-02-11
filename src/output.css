@@ -601,6 +601,10 @@ video {
   margin-top: 2rem;
 }
 
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
 .block {
   display: block;
 }
@@ -611,6 +615,10 @@ video {
 
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .w-1\/2 {
@@ -683,6 +691,14 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pb-24 {
+  padding-bottom: 6rem;
+}
+
+.pb-48 {
+  padding-bottom: 12rem;
 }
 
 .text-center {

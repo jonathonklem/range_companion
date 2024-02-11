@@ -23,7 +23,7 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp className="bg-darkbg">
     <IonReactRouter>
-        <IonRouterOutlet>
+        <div className="pb-24">
           <Route exact path="/moa_calculator">
             <MoaCalculator />
           </Route>
@@ -36,7 +36,7 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/moa_calculator" />
           </Route>
-        </IonRouterOutlet>
+        </div>
         <div className="text-center fixed w-full bottom-2">
             <Link className="inline-block mx-4 bg-redbg px-4 py-2 inline-block text-center hover:text-darkbg" to="/moa_calculator">
               <FontAwesomeIcon className="mr-4" icon={faCalculator} />
