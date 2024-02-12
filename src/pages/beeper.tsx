@@ -12,6 +12,14 @@ const Beeper = () => {
     useEffect(() => {
         audio.load();
     }, []);
+
+    useEffect(() => {
+        if (minRandomPause > maxRandomPause) {
+            const temp = maxRandomPause;
+            setMaxRandomPause(minRandomPause);
+            setMinRandomPause(temp);
+        }
+    }, [maxRandomPause, minRandomPause])
     
     const startTimer = () => {
         const randomPause = Math.round((Math.random() * (maxRandomPause - minRandomPause) + minRandomPause)*1000)/1000;
