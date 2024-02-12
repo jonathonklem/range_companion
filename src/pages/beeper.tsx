@@ -12,6 +12,14 @@ const Beeper = () => {
     useEffect(() => {
         audio.load();
     }, []);
+
+    useEffect(() => {
+        if (minRandomPause > maxRandomPause) {
+            const temp = maxRandomPause;
+            setMaxRandomPause(minRandomPause);
+            setMinRandomPause(temp);
+        }
+    }, [maxRandomPause, minRandomPause])
     
     const startTimer = () => {
         const randomPause = Math.round((Math.random() * (maxRandomPause - minRandomPause) + minRandomPause)*1000)/1000;
@@ -54,15 +62,15 @@ const Beeper = () => {
             <form className="w-5/6  mx-auto">
                 <label className="block my-2 mx-auto">
                     <div className="block text-sm font-extralight tracking-wider">Max Random Pause</div>
-                    <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={maxRandomPause} onChange={(e) => setMaxRandomPause(Number(e.target.value))} name="max_random_pause" /></div>
+                    <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={maxRandomPause ? maxRandomPause : ''} onChange={(e) => setMaxRandomPause(Number(e.target.value))} name="max_random_pause" /></div>
                 </label> 
                 <label className="block my-2 mx-auto">
                     <div className="block text-sm font-extralight tracking-wider">Min Random Pause</div>
-                    <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={minRandomPause} onChange={(e) => setMinRandomPause(Number(e.target.value))} name="min_random_pause" /></div>
+                    <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={minRandomPause ? minRandomPause : '' } onChange={(e) => setMinRandomPause(Number(e.target.value))} name="min_random_pause" /></div>
                 </label> 
                 <label className="block my-2 mx-auto">
                     <div className="block text-sm font-extralight tracking-wider">Par Time (leave blank for none)</div>
-                    <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={parTime} onChange={(e) => setParTime(Number(e.target.value))} name="par_time" /></div>
+                    <div className="block w-full p-2 mx-auto"><input type="number" step=".01"  value={parTime ? parTime : ''} onChange={(e) => setParTime(Number(e.target.value))} name="par_time" /></div>
                 </label> 
             </form>
             <button onClick={startTimer} className="rounded-3xl tracking-wider text-lg bg-redbg drop-shadow-lg text-white py-2 px-4 w-1/4 block mx-auto text-center mt-4">Beep</button>

@@ -50,17 +50,17 @@ const MoaCalculator = () => {
             <form className="w-5/6 mx-auto">
                 <label className="block my-2 mx-auto">
                     <div className="block text-sm font-extralight tracking-wider">Range</div>
-                    <div className="block w-full p-2 mx-auto"><input type="number" step=".0001"  value={range} onChange={(e) => setRange(Number(e.target.value))} name="range" /></div>
+                    <div className="block w-full p-2 mx-auto"><input type="number" step=".0001"  value={range ? range : ''} onChange={(e) => setRange(Number(e.target.value))} name="range" /></div>
                     <div className="block w-full p-2 mx-auto"><select value={rangeUnit} onChange={(e) => {setRangeUnit(Number(e.target.value))}}><option value="914.4">Yards</option><option value="304.8">Feet</option><option value="1000">Meters</option></select></div>
                 </label> 
                 <label className="block my-2 mx-auto">
                     <div className="block text-sm font-extralight tracking-wider">Length</div>
-                    <div className="block w-full p-2 w-1/2 mx-auto"><input value={length} onChange={(e) => setLength(Number(e.target.value))} type="number" step=".0001"  name="length" /></div>
+                    <div className="block w-full p-2 w-1/2 mx-auto"><input value={length ? length : '' } onChange={(e) => setLength(Number(e.target.value))} type="number" step=".0001"  name="length" /></div>
                     <div className="block w-full p-2 mx-auto"><select value={lengthUnit} onChange={(e) => {setLengthUnit(Number(e.target.value))}}><option value="25.4">Inches</option><option value="10">CM</option><option value="1">MM</option></select></div>
                 </label>
                 <label className="block my-2 mx-auto">
                     <div className="block text-sm font-extralight tracking-wider">MOA</div>
-                    <div className="block w-full p-2 w-1/2 mx-auto"><input value={moa} onChange={(e) => setMoa(Number(e.target.value))} type="number" step=".0001" name="moa" /></div>
+                    <div className="block w-full p-2 w-1/2 mx-auto"><input value={moa ? moa : '' } onChange={(e) => setMoa(Number(e.target.value))} type="number" step=".0001" name="moa" /></div>
                     <div className="block w-full p-2 mx-auto"><select value={moaUnit} onChange={(e) => {setMoaUnit(Number(e.target.value))}}><option value="25.4">Inches</option><option value="10">CM</option><option value="1">MM</option></select></div>
                 </label>
                 <div className="text-center">
